@@ -34,15 +34,13 @@
 
         -
             name: 'reboot clusters KSQL'
-            user:
-                name: web_user
-                uid: 1040
-                group: developers
+            when: output.matched == 1
         -
             name: 'Execute a script or curl gainst KSQL api'
             script: /tmp/install_script.sh
+            when: outputk.matched == 1
         -
-            name: 'delete directorio'
-            service:
-                name: httpd
-                state: present
+            name: 'delete directory'
+            file:
+              state: absent
+              path: "/temp/{{ name_directory }}/"
