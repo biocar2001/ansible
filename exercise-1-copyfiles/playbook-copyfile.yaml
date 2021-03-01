@@ -1,0 +1,11 @@
+-
+  name: Copy file to all hosts
+  hosts: all
+  vars:
+    ansible_user: root
+    ansible_password: root
+  tasks:
+    - name: Copy files to containers
+      copy:
+        src: /tmp/testFile.txt
+        dest: /tmp/testFile.txt

@@ -1,0 +1,9 @@
+-
+  name: Check conectivity to target docker containers
+  hosts: all
+  vars:
+    ansible_user: root
+    ansible_password: root
+  tasks:
+    - name: Ping containers
+      ping:

@@ -1,0 +1,8 @@
+---
+- name: Hello World!
+  hosts: localhost
+ 
+  tasks:
+ 
+  - name: Hello World!
+    shell: echo "Hi! Tower is working." > /home/carlos/Escritorio/Cursos/Ansible/ansible-example/hello-world/playbooks/hello.txt
