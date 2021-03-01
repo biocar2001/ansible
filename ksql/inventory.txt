@@ -1,0 +1,9 @@
+# Inventario de KSQL servers donde actualizar
+
+# KSQL
+name_directory=adn destiny_ksql=ksql/extension
+
+[ksql_servers]
+172.20.128.2
+172.20.128.3
+172.20.128.4

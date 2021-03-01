@@ -1,0 +1,48 @@
+-
+    name: 'Execute pipeline ksql and ksql-udf'
+    hosts: ksql_servers
+    tasks:
+        -
+            name: 'Extract .zip in /temp/{{ name_directory }}'
+            ansible.builtin.unarchive:
+              src: '{{ name_file }}'
+              dest: '/temp/{{ name_directory }}'
+        -
+            name: Find files .jar
+            find:
+              paths: '/temp/{{ name_directory }}'
+              patterns: '*.jar'
+            register: output
+        -
+            name: Find files .ksql
+            find:
+              paths: '/temp/{{ name_directory }}'
+              patterns: '*.ksql'
+            register: outputk
+        -
+            name: Ansible copy multiple files with wildcard matching *.jar to KSQL servers.
+            copy:
+              src: "{{ item }}"
+              dest: /opt/ksql-extension/
+              owner: cp-ksql
+              group: confluent
+              mode: 0755
+              force: yes
+            with_fileglob:
+              - '/temp/{{ name_directory }}/*.jar'
+            when: output.matched == 1
+
+        -
+            name: 'reboot clusters KSQL'
+            user:
+                name: web_user
+                uid: 1040
+                group: developers
+        -
+            name: 'Execute a script or curl gainst KSQL api'
+            script: /tmp/install_script.sh
+        -
+            name: 'delete directorio'
+            service:
+                name: httpd
+                state: present
