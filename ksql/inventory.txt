@@ -4,6 +4,5 @@
 name_directory=adn destiny_ksql=ksql/extension
 
 [ksql_servers]
-172.20.128.2
-172.20.128.3
-172.20.128.4
+172.22.0.5
+172.22.0.6
